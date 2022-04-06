@@ -19,7 +19,7 @@ request.get(requestUrl, (err,res,body) =>{
     else {
         if(res.statusCode == 200){
             var result = body
-            //console.log(`body data => ${result}`)
+            console.log(`body data => ${result}`)
             var xmlToJson = convert.xml2json(result, {compact: true, spaces: 4});
             console.log(`xml to json => ${xmlToJson}`)
 
