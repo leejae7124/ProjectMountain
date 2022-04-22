@@ -1,5 +1,5 @@
 const axios = require('axios')
-const key = require('../config/ServiceKey')
+const key = require('../config/servicekey')
 const url = require('../config/url')
 
 async function fetchData(hght, araCd, ssnCd, thmCd) {
