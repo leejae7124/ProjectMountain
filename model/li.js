@@ -10,4 +10,5 @@ var listschema = new Schema({
     }
 });
 
+
 module.exports = {mountain_list : mongoose.model('mountian_list', listschema)}
