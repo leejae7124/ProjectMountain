@@ -54,5 +54,5 @@ jobs:
         run: aws deploy create-deployment
           --application-name projectmountain-codedeploy
           --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name deploy-GROUP
+          --deployment-group-name GROUP
           --s3-location bucket=project-mountain-bucket,bundleType=zip,key=public/project-mountain.zip
