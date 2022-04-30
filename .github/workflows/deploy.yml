@@ -55,4 +55,4 @@ jobs:
           --application-name projectmountain-codedeploy
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name deploy-group
-          --s3-location bucket=project-mountain-bucket,bundleType=zip,key=public/blog-vanilla.zip
+          --s3-location bucket=project-mountain-bucket,bundleType=zip,key=public/project-mountain.zip
