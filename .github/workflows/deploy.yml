@@ -38,7 +38,7 @@ jobs:
        #   ${{ secrets.ENV }}
 
       - name: zip distributions
-        run: zip -r blog-vanilla.zip ./server ./appspec.yml ./scripts
+        run: zip -r project-mountain.zip ./appspec.yml ./scripts
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -48,7 +48,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 .project-mountain.zip s3://project-mountain-bucket/
+        run: aws s3 cp --region ap-northeast-2 ./project-mountain.zip s3://project-mountain-bucket/
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
