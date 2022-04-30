@@ -30,12 +30,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      #- name: create env file
-       # working-directory: /
-       # run: |
-       #   touch .env
-       #   cat << EOF >> .env
-       #   ${{ secrets.ENV }}
+      - name: create env file
+        working-directory: /
+        run: |
+          touch .env
+          cat << EOF >> .env
+          ${{ secrets.ENV }}
 
       - name: zip distributions
         run: zip -r project-mountain.zip ./appspec.yml ./scripts
