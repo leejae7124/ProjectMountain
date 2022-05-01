@@ -22,7 +22,9 @@ app.use('/api/mountInit', require('./routes/mountInit'))
 app.use('/api/user', require('./routes/usermanage'))
 
 //route handling for community
-app.use('/api/community', require('./routes/communityInit')) 
+app.use('/api/community/free', require('./routes/bordF')) 
+app.use('/api/community/certify', require('./routes/bordC')) 
+app.use('/api/community/question', require('./routes/bordQ')) 
 
 //route handling for mountinfo
 app.use('/api/mountInfo', require('./routes/mountInfo'))

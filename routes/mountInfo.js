@@ -72,8 +72,48 @@ router.get('/search', (req, res) => {
 })
 
 //메인 페이지 개인 키워드 기준으로 추천
-router.get('/main', auth, (req, res) => { 
-    
+let keywordArray = new Array();
+let newArray = new Array();
+let keywordList = (req, res, next) => {
+    //키워드 안의 산id 배열에 모두 저장
+    for(let i = 0; i < req.user.keyword.length; i++){
+        mountain_list.findOne({ name: req.user.keyword[i] }, (err, result) => { 
+            //if (err) return res.status(500).send({error: 'failed'});
+            keywordArray = keywordArray.concat(result.list)
+            if(i == req.user.keyword.length-1) {
+                next()
+            }
+        })
+    }
+}
+router.get('/main', auth, keywordList, (req, res) => { 
+    //랜덤하게 리스트 배열 중 중복없이 15개 id 뽑기
+    let randomIndexArray = []
+    for (let n = 0; n < 15; n++) {
+        randomNum = Math.floor(Math.random() * keywordArray.length)
+        if (randomIndexArray.indexOf(randomNum) === -1) randomIndexArray.push(randomNum)
+        else n--
+    }
+    for(let j =0; j < 15; j++) newArray.push(keywordArray[randomIndexArray[j]])
+
+    for (let i = 0; i < 15; i++) {     
+        //리스트에서 뽑은 id가 지역별 collection에 있는지 확인
+        for(let j = 0; j < 15; j++){
+            Mount_loc_schema[j].find({ mntnid: newArray[i]}, (err, docs) => {
+                if (err) return res.status(500).send({error: 'failed'});
+                if(docs.length != 0) array = array.concat(docs);
+            })
+        }
+        //마직막 지역별 collection에 있는지 확인 후 전송
+        Mount_loc_schema[15].find({ mntnid: newArray[i]}, (err, docs) => {
+            if (err) return res.status(500).send({error: 'failed'});
+            if(docs.length != 0) array = array.concat(docs);
+
+            if(i == 14) res.json(array);
+        })
+    }
+    keywordArray = []
+    newArray = []
 })
 
 module.exports = router

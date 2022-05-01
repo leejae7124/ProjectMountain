@@ -30,7 +30,7 @@ var communitySchema = new Schema({
 
 module.exports = {
     bordF : mongoose.model('bordF', communitySchema),
-    brdQ : mongoose.model('brdQ', communitySchema),
+    bordQ : mongoose.model('brdQ', communitySchema),
     bordC : mongoose.model('bordC', communitySchema),
     //bordR : mongoose.model('bordR', communitySchema)
 }

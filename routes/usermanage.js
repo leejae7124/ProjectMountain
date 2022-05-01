@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { User } = require("../model/User");
 const { auth } = require('../middleware/auth');
+const Commu = require('../model/community');
+const Commu_schema =[
+  Commu.bordC,
+  Commu.bordF,
+  Commu.bordQ
+]
+
 
 router.post('/register', (req, res) => {
   //회원 가입 할떄 필요한 정보들을  client에서 가져오면 
@@ -68,6 +75,32 @@ router.post('/auth', auth, (req, res) => {
     bord: req.user.bord,
     badge: req.user.badge
   })
+})
+
+let array = new Array();
+router.post('/bord', auth, (req, res) => {
+  //여기 까지 미들웨어를 통과해 왔다는 얘기는  Authentication 이 True 라는 말.
+
+  for (let i = 0; i < req.user.bord.length; i++) {     
+    //user가 쓴 bordC가 있는지 확인
+    Commu_schema[0].find({ _id: req.user.bord[i]}, (err, docs) => {
+      if (err) return res.status(500).send({error: 'failed'});
+      if(docs.length != 0) array = array.concat(docs);
+    })
+    //user가 쓴 bordF가 있는지 확인
+    Commu_schema[1].find({ _id: req.user.bord[i]}, (err, docs) => {
+      if (err) return res.status(500).send({error: 'failed'});
+      if(docs.length != 0) array = array.concat(docs);
+    })
+    //user가 쓴 bordQ가 있는지 확인 후 전송
+    Commu_schema[2].find({ _id: req.user.bord[i]}, (err, docs) => {
+      if (err) return res.status(500).send({error: 'failed'});
+      if(docs.length != 0) array = array.concat(docs);
+
+      if(i == req.user.bord.length - 1) res.json(array);
+    })
+  }
+  array = []
 })
 
 router.post('/logout', auth, (req, res) => {
