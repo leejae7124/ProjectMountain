@@ -38,7 +38,7 @@ jobs:
           #${{ secrets.ENV }}
 
       - name: zip distributions
-        run: zip -r project-mountain.zip ./.github/workflows/appspec.yml ./scripts
+        run: zip -r project-mountain.zip ./.github/workflows/appspec.yml ./scripts ./
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
