@@ -15,21 +15,24 @@ app.use(express.json({extened: false}))
 const connectDB = require('./config/db')
 connectDB();
 
-//route handling for mount
-app.use('/api/mount', require('./routes/mount'))
+//route handling for mountinit
+app.use('/api/mountInit', require('./routes/mountInit'))
 
 //route handling for usermanage
 app.use('/api/user', require('./routes/usermanage'))
 
+//route handling for community
+app.use('/api/community/free', require('./routes/bordF')) 
+app.use('/api/community/certify', require('./routes/bordC')) 
+app.use('/api/community/question', require('./routes/bordQ')) 
+
+//route handling for mountinfo
+app.use('/api/mountInfo', require('./routes/mountInfo'))
 
 //통신 연습
 app.get('/', (req, res) => {
-  res.json({success: true, message: 'welcom to backend'})
-})
-app.get('/api/hello', (req, res) => {
   res.send('hi backend!!!!!!!')
 })
-
 
 //Port
 const port = 5000

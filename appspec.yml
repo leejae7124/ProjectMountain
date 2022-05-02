@@ -1,6 +1,5 @@
 version: 0.0
 os: linux
-
 files:
   - source: /
     destination: /home/ec2-user/test
@@ -11,9 +10,9 @@ permissions:
     pattern: '**'
     owner: root
     group: root
-
+    
 hooks:
   AfterInstall:
-    - location: deploy.sh
-      timeout: 720
+    - location: ./scripts/deploy.sh
+      timeout: 180
       runas: root
