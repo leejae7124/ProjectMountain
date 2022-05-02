@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 REPOSITORY=/home/ec2-user/test
 pm2 kill
 cd ${REPOSITORY}
