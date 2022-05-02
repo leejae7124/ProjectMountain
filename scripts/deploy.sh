@@ -7,7 +7,6 @@ cd $REPOSITORY
 npm install
 pm2 kill
 #pm2 start test.js
-#cd ${REPO}
 
 #sudo npm install
 
