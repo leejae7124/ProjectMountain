@@ -44,7 +44,7 @@ jobs:
           #${{ secrets.ENV }}
 
       - name: zip distributions
-        run: zip -qq -r ./$GITHUB_SHA.zip
+        run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
         #run: zip -r project-mountain.zip ./
 
