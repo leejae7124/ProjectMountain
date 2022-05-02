@@ -5,10 +5,10 @@ REPOSITORY=/home/ec2-user/test
 cd $REPOSITORY
 
 npm install
-pm2 kill
-pm2 start test.js
+#pm2 kill
+#pm2 start test.js
 #cd ${REPO}
 
 #sudo npm install
 
-#npm run-script dev
+npm run-script dev
