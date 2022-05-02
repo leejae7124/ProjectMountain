@@ -56,10 +56,10 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$BK_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./project-mountain.zip s3://$BK_NAME/$PROJECT_NAME/project-mountain.zip
         #run: aws s3 cp --region ap-northeast-2 ./project-mountain.zip s3://project-mountain-bucket/
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name $APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $DEPLOY_GROUP --s3-location bucket=$BK_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name $APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $DEPLOY_GROUP --s3-location bucket=$BK_NAME,bundleType=zip,key=$PROJECT_NAME/project-mountain.zip
       #- name: deploy with AWS codeDeploy
        # run: aws deploy create-deployment
         #  --application-name projectmountain-codedeploy
