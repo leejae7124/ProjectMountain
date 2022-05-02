@@ -8,6 +8,12 @@ on:
   push:
     branches: [ master ]
 
+env:
+  PROJECT_NAME: ProjectMountain
+  BK_NAME: project-mountain-bucket
+  APP_NAME: projectmountain-codedeploy
+  DEPLOY_GROUP: GROUP
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -38,7 +44,9 @@ jobs:
           #${{ secrets.ENV }}
 
       - name: zip distributions
-        run: zip -r project-mountain.zip ./
+        run: zip -qq -r ./$GITHUB_SHA.zip
+        shell: bash
+        #run: zip -r project-mountain.zip ./
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -48,11 +56,13 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./project-mountain.zip s3://project-mountain-bucket/
-
-      - name: deploy with AWS codeDeploy
-        run: aws deploy create-deployment
-          --application-name projectmountain-codedeploy
-          --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name GROUP
-          --s3-location bucket=project-mountain-bucket,bundleType=zip,key=project-mountain.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$BK_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+        #run: aws s3 cp --region ap-northeast-2 ./project-mountain.zip s3://project-mountain-bucket/
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name $APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $DEPLOY_GROUP --s3-location bucket=$BK_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+      #- name: deploy with AWS codeDeploy
+       # run: aws deploy create-deployment
+        #  --application-name projectmountain-codedeploy
+         # --deployment-config-name CodeDeployDefault.OneAtATime
+          #--deployment-group-name GROUP
+          #--s3-location bucket=project-mountain-bucket,bundleType=zip,key=project-mountain.zip
