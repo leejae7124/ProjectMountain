@@ -1,5 +1,6 @@
 version: 0.0
 os: linux
+
 files:
   - source: /
     destination: /home/ec2-user/test
@@ -14,5 +15,5 @@ permissions:
 hooks:
   AfterInstall:
     - location: deploy.sh
-      timeout: 180
+      timeout: 720
       runas: root
