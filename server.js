@@ -31,7 +31,7 @@ app.use('/api/community/recruit', require('./routes/bordR'))
 app.use('/api/mountInfo', require('./routes/mountInfo'))
 
 //route handling for unity
-app.use('/api/unity', require('./routes/unity'))
+//app.use('/api/unity', require('./routes/unity'))
 
 //통신 연습
 app.get('/', (req, res) => {
