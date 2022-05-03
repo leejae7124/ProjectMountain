@@ -2,11 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/test
+    destination: /home/ec2-user/app/git/ProjectMountain
     overwrite: yes
 
 permissions:
-  - object: /home/ec2-user/test
+  - object: /home/ec2-user/app/git/ProjectMountain
     pattern: '**'
     owner: root
     group: root
