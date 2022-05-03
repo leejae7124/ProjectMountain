@@ -2,17 +2,26 @@ const express = require('express');
 const { bordF } = require('../model/community');
 const router = express.Router();
 const { User } = require('../model/User');
+const { auth } = require('../middleware/auth');
 
 //자유게시판 생성
-router.post('/init', (req, res) => {
+router.post('/init', auth, (req, res) => {
   const bord = new bordF(req.body)
-  User.updateOne({nickname: req.body.nickname}, {$push: {bord: req.body._id}}, function(error, docs){
+  User.updateOne({email: req.user.email}, {$push: {bord: req.body._id}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
       bord.save((err) => {
         if(err) return res.json({ success: false, err })
-        return res.status(200).json({success: true})
+        else {
+          bordF.updateOne({_id: req.body._id}, {$set: {nickname: req.user.nickname}}, function(error, docs){
+            if(error){
+                console.log(error);
+            }else{
+              res.send({success: true})
+            }
+        })
+        }
       })
     }
   })

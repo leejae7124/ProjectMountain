@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const saltRounds = 10
 const jwt = require('jsonwebtoken');
 
@@ -9,6 +9,10 @@ const userSchema = mongoose.Schema({
         type: String,
         maxlength: 50,
         unique: true
+    },
+    name: {
+        type: String,
+        maxlength: 50
     },
     email: {
         type: String,
