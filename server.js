@@ -35,10 +35,9 @@ app.use('/api/unity', require('./routes/unity'))
 
 //통신 연습
 app.get('/', (req, res) => {
-  res.send('hi backend!')
+  res.send('hi backend!!!!!!!')
 })
 
 //Port
 const port = 5000
-server = app.listen(port, () => console.log('Server is running'));
-
+app.listen(port, () => console.log('Server is running'));
