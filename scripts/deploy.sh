@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/home/ec2-user/test
+REPOSITORY=/home/ec2-user/app/git/ProjectMountain2
 #pm2 kill
 cd $REPOSITORY
 
