@@ -14,6 +14,9 @@ mntninfopoflc:{
 },
 keyword:{
   type: Array
+},
+mntnattchimageseq: {
+  type: String
 }
 });
 
