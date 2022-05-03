@@ -48,7 +48,7 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 
 dotenv.config();
-const webSocket = require('./routes/socket');
+//const webSocket = require('./routes/socket');
 //const indexRouter = require('./routes');
 
 app.set('view engine', 'html');
@@ -89,4 +89,4 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-webSocket(server); //socket.js에 server를 넣었으므로 express 서버와 websocket 서버랑 연결이 된다.
+//webSocket(server); //socket.js에 server를 넣었으므로 express 서버와 websocket 서버랑 연결이 된다.
