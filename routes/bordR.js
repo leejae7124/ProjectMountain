@@ -1,11 +1,11 @@
 const express = require('express');
-const { bordC } = require('../model/community');
+const { bordR } = require('../model/community');
 const router = express.Router();
 const { User } = require('../model/User');
 
-//인증게시판 생성
+//모집게시판 생성
 router.post('/init', (req, res) => {
-  const bord = new bordC(req.body)
+  const bord = new bordR(req.body)
   User.updateOne({nickname: req.body.nickname}, {$push: {bord: req.body._id}}, function(error, docs){
     if(error){
         console.log(error);
@@ -17,9 +17,9 @@ router.post('/init', (req, res) => {
     }
   })
 })
-//인증게시판 댓글 추가
-router.post('/commentIn', (req, res) => {
-  bordC.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment}}, function(error, docs){
+//모집게시판 댓글 추가
+router.post('/comment', (req, res) => {
+  bordR.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
@@ -27,9 +27,10 @@ router.post('/commentIn', (req, res) => {
     }
   })
 })
-//인증게시판 댓글 삭제
+//모집게시판 댓글 삭제
 router.post('/commentOut', (req, res) => {
-  bordC.updateOne({_id: req.body._id}, {$pull: {comment: req.body.comment}}, function(error, docs){
+  const bord = new bordF(req.body)
+  bordR.updateOne({_id: req.body._id}, {$pull: {comment: req.body.comment}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
@@ -37,9 +38,9 @@ router.post('/commentOut', (req, res) => {
     }
   })
 })
-//인증게시판 수정
+//모집게시판 수정
 router.post('/update', (req, res) => {
-  bordC.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text}}, function(error, docs){
+  bordR.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
@@ -47,9 +48,9 @@ router.post('/update', (req, res) => {
     }
   })
 })
-//인증게시판 리스트
+//모집게시판 리스트
 router.get('/list', (req, res) => {
-  bordC.find(function(error, docs){
+  bordR.find(function(error, docs){
     if(error){
         console.log(error);
     }else{
@@ -57,9 +58,9 @@ router.get('/list', (req, res) => {
     }
   })
 })
-//인증게시판 삭제
+//모집게시판 삭제
 router.post('/delete', (req, res) => {
-  bordC.deleteOne({_id: req.body.id}, function(err, result){
+  bordR.deleteOne({_id: req.body.id}, function(err, result){
     if(error){
         console.log(error);
     }else{
@@ -67,9 +68,9 @@ router.post('/delete', (req, res) => {
     }
   })
 })
-//인증게시판 검색
+//자유게시판 검색
 router.post('/serch', (req, res) => {
-  bordC.find({ title: new RegExp('.*' + req.body.search + '.*')}, (err, docs) => {
+  bordR.find({ title: new RegExp('.*' + req.body.search + '.*')}, (err, docs) => {
     if (err) return res.status(500).send({error: 'failed'});
     else res.send(docs)
   })

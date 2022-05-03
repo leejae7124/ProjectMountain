@@ -3,11 +3,10 @@ const { bordF } = require('../model/community');
 const router = express.Router();
 const { User } = require('../model/User');
 
-
-//자유게시판
+//자유게시판 생성
 router.post('/init', (req, res) => {
   const bord = new bordF(req.body)
-  User.updateOne({name: req.body.name}, {$push: {bord: req.body._id}}, function(error, docs){
+  User.updateOne({nickname: req.body.nickname}, {$push: {bord: req.body._id}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
@@ -18,7 +17,8 @@ router.post('/init', (req, res) => {
     }
   })
 })
-router.post('/comment', (req, res) => {
+//자유게시판 댓글 추가
+router.post('/commentIn', (req, res) => {
   const bord = new bordF(req.body)
   bordF.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment}}, function(error, docs){
     if(error){
@@ -28,6 +28,18 @@ router.post('/comment', (req, res) => {
     }
   })
 })
+//자유게시판 댓글 삭제
+router.post('/commentOut', (req, res) => {
+  const bord = new bordF(req.body)
+  bordF.updateOne({_id: req.body._id}, {$pull: {comment: req.body.comment}}, function(error, docs){
+    if(error){
+        console.log(error);
+    }else{
+      res.send(docs)
+    }
+  })
+})
+//자유게시판 수정
 router.post('/update', (req, res) => {
   bordF.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text}}, function(error, docs){
     if(error){
@@ -37,6 +49,7 @@ router.post('/update', (req, res) => {
     }
   })
 })
+//자유게시판 리스트
 router.get('/list', (req, res) => {
   bordF.find(function(error, docs){
     if(error){
@@ -46,8 +59,9 @@ router.get('/list', (req, res) => {
     }
   })
 })
+//자유게시판 삭제
 router.post('/delete', (req, res) => {
-  bordF.deleteOne({id: req.body.id}, function(err, result){
+  bordF.deleteOne({_id: req.body.id}, function(err, result){
     if(error){
         console.log(error);
     }else{
@@ -55,6 +69,7 @@ router.post('/delete', (req, res) => {
     }
   })
 })
+//자유게시판 검색
 router.post('/serch', (req, res) => {
   bordF.find({ title: new RegExp('.*' + req.body.search + '.*')}, (err, docs) => {
     if (err) return res.status(500).send({error: 'failed'});
