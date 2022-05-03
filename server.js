@@ -32,7 +32,7 @@ app.use('/api/mountInfo', require('./routes/mountInfo'))
 
 //통신 연습
 app.get('/', (req, res) => {
-  res.send('hi backend server!')
+  res.send('hi backend!')
 })
 
 //Port
