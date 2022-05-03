@@ -17,7 +17,7 @@ router.post('/register', (req, res) => {
   user.save((err, userInfo) => {
     if(err) {
     //err code가 11000은 중복된 값이 들어간 경우
-      if (err.code == 11000) return res.json({success: false, message: 'email or name duplicate'})
+      if (err.code == 11000) return res.json({success: false, message: 'email or nickname duplicate'})
       else return res.json({ success: false, err })
     }
     return res.status(200).json({
@@ -56,8 +56,9 @@ router.post('/login', (req, res) => {
           .json({ loginSuccess: true, 
             userId: user._id, 
             usertoken: user.token, 
-            email: req.body.email, 
-            name: req.body.name})
+            email: user.email,
+            name: user.name 
+          })
       })
     })
   })
@@ -71,7 +72,7 @@ router.post('/auth', auth, (req, res) => {
     email: req.user.email,
     name: req.user.name,
     phone: req.user.phone,
-    userImage: req.usr.userImage,
+    //userImage: req.usr.userImage,
     bord: req.user.bord,
     badge: req.user.badge
   })

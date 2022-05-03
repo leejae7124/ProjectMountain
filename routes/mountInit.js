@@ -175,12 +175,12 @@ router.post('/list_hght', async(req, res) => {
     }
 });
 
-//좌표 필드 추가
+//좌표 필드 추가(의미없는 값 넣어서 자리 만들기)
 router.post('/list_loc_add', async(req, res) => {
     try{
         for(var i = 0; i < mountain_loc_list.length; i++){
-            Mount_loc_schema[i].collection.updateMany( {ptmntrcmmncoursdscrt: " "}, {$set:{ x: 0 }}, { upsert: true }) 
-            Mount_loc_schema[i].collection.updateMany( {ptmntrcmmncoursdscrt: " "}, {$set:{ y: 0 }}, { upsert: true }) 
+            Mount_loc_schema[i].collection.updateMany( {ptmntrcmmncoursdscrt: " "}, {$set:{ x: 35.250371 }}, { upsert: true }) 
+            Mount_loc_schema[i].collection.updateMany( {ptmntrcmmncoursdscrt: " "}, {$set:{ y: 129.14546 }}, { upsert: true }) 
         }
     res.send('fin')
     }catch(error){
