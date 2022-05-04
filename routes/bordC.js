@@ -4,7 +4,7 @@ const router = express.Router();
 const { User } = require('../model/User');
 const { auth } = require('../middleware/auth');
 
-//게시판 생성
+//인증게시판 생성
 router.post('/init', auth, (req, res) => {
   const bord = new bordC(req.body)
   User.updateOne({email: req.user.email}, {$push: {bord: req.body._id}}, function(error, docs){

@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
         trim: true,
         unique: true
     },
-    password: {
+    password: { //최소길이 주기
         type: String,
         trim : true
     },
