@@ -34,6 +34,9 @@ const userSchema = mongoose.Schema({
     keyword: {
         type: Array,
     },
+    description: {
+        type: String,
+    },
     bord: {
         type: Array
     },
