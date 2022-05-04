@@ -96,7 +96,7 @@ router.post('/auth', auth, (req, res) => {
 let array = new Array();
 router.post('/bord', auth, (req, res) => {
   //여기 까지 미들웨어를 통과해 왔다는 얘기는  Authentication 이 True 라는 말.
-  if(req.user.bord.length == 0) res.send('empty') //게시물이 없는 경우
+  if(req.user.bord.length == 0) res.json({message: 'empty'}) //게시물이 없는 경우
   for (let i = 0; i < req.user.bord.length; i++) {     
     //user가 쓴 bordR가 있는지 확인
     Commu_schema[3].find({ _id: req.user.bord[i]}, (err, docs) => {
@@ -122,7 +122,7 @@ router.post('/bord', auth, (req, res) => {
 //인증 게시판 확인
 router.post('/bordC', auth, (req, res) => {
   //여기 까지 미들웨어를 통과해 왔다는 얘기는  Authentication 이 True 라는 말.
-  if(req.user.bord.length == 0) res.send('empty') //게시물이 있는지 확인
+  if(req.user.bord.length == 0) res.json({message: 'empty'}) //게시물이 있는지 확인
   for (let i = 0; i < req.user.bord.length; i++) {     
     //user가 쓴 bordC가 있는지 확인 후 전송
     Commu_schema[0].find({ _id: req.user.bord[i]}, (err, docs) => {
