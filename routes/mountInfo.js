@@ -25,7 +25,7 @@ const { mountain_list } = require('../model/MountList');
 
 //키워드별 정보 전송
 let array = new Array();
-router.get('/keyword', (req, res) => {
+router.post('/keyword', (req, res) => {
 
     //받아온 이름으로 키워드를 찾고 id 리스트 찾기
     mountain_list.findOne({ name: req.body.keyword }, (err, result) => { 
@@ -53,7 +53,7 @@ router.get('/keyword', (req, res) => {
 })
 
 //검색 정보 전송
-router.get('/search', (req, res) => {
+router.post('/search', (req, res) => {
 
     //지역별 collection에 검색한 문자열이 포함된 값을 찾는다
     for(let j = 0; j < 15; j++){
@@ -86,7 +86,7 @@ let keywordList = (req, res, next) => {
         })
     }
 }
-router.get('/main', auth, keywordList, (req, res) => { 
+router.post('/main', auth, keywordList, (req, res) => { 
     //랜덤하게 리스트 배열 중 중복없이 15개 id 뽑기
     let randomIndexArray = []
     for (let n = 0; n < 15; n++) {
