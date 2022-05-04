@@ -5,23 +5,15 @@ const { User } = require('../model/User');
 const { auth } = require('../middleware/auth');
 
 //인증게시판 생성
-router.post('/init', auth, (req, res) => {
+router.post('/init', (req, res) => {
   const bord = new bordC(req.body)
-  User.updateOne({email: req.user.email}, {$push: {bord: req.body._id}}, function(error, docs){
+  User.updateOne({email: req.user.nickname}, {$push: {bord: req.body._id}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
       bord.save((err) => {
         if(err) return res.json({ success: false, err })
-        else {
-          bordC.updateOne({_id: req.body._id}, {$set: {nickname: req.user.nickname}}, function(error, docs){
-            if(error){
-                console.log(error);
-            }else{
-              res.send({success: true})
-            }
-        })
-        }
+        else res.json({ success: true })
       })
     }
   })
