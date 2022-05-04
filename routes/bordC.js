@@ -11,13 +11,13 @@ router.post('/init', (req, res) => {
     if(err) return res.json({ success: false, err })
     else res.json({ success: true })
   })
-  User.updateOne({name: req.user.name}, {$push: {bord: req.body._id}}, function(error, docs){
-    if(error){
-        console.log(error);
-    }else{
+  // User.updateOne({name: req.user.name}, {$push: {bord: req.body._id}}, function(error, docs){
+  //   if(error){
+  //       console.log(error);
+  //   }else{
       
-    }
-  })
+  //   }
+  //})
 })
 //인증게시판 댓글 추가
 router.post('/commentIn', (req, res) => {
