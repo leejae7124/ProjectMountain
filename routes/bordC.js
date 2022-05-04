@@ -7,7 +7,7 @@ const { auth } = require('../middleware/auth');
 //인증게시판 생성
 router.post('/init', (req, res) => {
   const bord = new bordC(req.body)
-  User.updateOne({email: req.user.nickname}, {$push: {bord: req.body._id}}, function(error, docs){
+  User.updateOne({name: req.user.name}, {$push: {bord: req.body._id}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
