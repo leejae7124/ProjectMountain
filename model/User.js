@@ -29,7 +29,7 @@ const userSchema = mongoose.Schema({
     },
     userImage: {
         type: String,
-        trim : true
+        default: 'https://project-mountain-bucket.s3.ap-northeast-2.amazonaws.com/uImage/nodejs.png'
     },
     keyword: {
         type: Array,
