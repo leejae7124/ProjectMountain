@@ -56,8 +56,8 @@ router.post('/login', (req, res) => {
           .json({ loginSuccess: true, 
             //userId: user._id, 
             token: user.token,
-            //email: user.email,
             nickname: user.name 
+            //email: user.email,
           })
       })
     })
