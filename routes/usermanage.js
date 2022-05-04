@@ -85,9 +85,9 @@ router.post('/auth', auth, (req, res) => {
     name: req.user.name,
     nickname: req.user.nickname,
     phone: req.user.phone,
-    userImage: req.usr.userImage,
+    //userImage: req.usr.userImage,
     //bord: req.user.bord,
-    badge: req.user.badge
+    //badge: req.user.badge
   })
 })
 
