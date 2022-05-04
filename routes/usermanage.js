@@ -57,7 +57,7 @@ router.post('/login', (req, res) => {
             //userId: user._id, 
             usertoken: user.token, 
             //email: user.email,
-            nickname: user.name 
+            //nickname: user.name 
           })
       })
     })
@@ -83,9 +83,10 @@ router.post('/auth', auth, (req, res) => {
     isAuth: true,
     email: req.user.email,
     name: req.user.name,
+    nickname: req.user.nickname,
     phone: req.user.phone,
     //userImage: req.usr.userImage,
-    bord: req.user.bord,
+    //bord: req.user.bord,
     badge: req.user.badge
   })
 })
