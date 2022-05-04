@@ -77,7 +77,7 @@ router.post('/delete', (req, res) => {
   })
 })
 //질문게시판 검색
-router.post('/serch', (req, res) => {
+router.post('/search', (req, res) => {
   bordQ.find({ title: new RegExp('.*' + req.body.search + '.*')}, (err, docs) => {
     if (err) return res.status(500).send({error: 'failed'});
     else res.send(docs)
