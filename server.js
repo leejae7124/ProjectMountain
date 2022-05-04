@@ -35,7 +35,7 @@ app.use('/api/unity', require('./routes/unity'))
 
 //통신 연습
 app.get('/', (req, res) => {
-  res.json({message: 'hi backend'})
+  res.json({message: 'hi backend!!!!!!!'})
 })
 
 //Port
