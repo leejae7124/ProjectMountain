@@ -87,6 +87,7 @@ router.post('/auth', auth, (req, res) => {
     phone: req.user.phone,
     description: req.user.description,
     userImage: req.user.userImage,
+    keyword: req.user.keyword,
     //bord: req.user.bord,
     badge: req.user.badge
   })
