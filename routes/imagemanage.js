@@ -10,7 +10,7 @@ const s3 = new AWS.S3({
     region: 'ap-northeast-2', 
 });
 
-const upload = multerS3({ 
+const storage = multerS3({ 
     s3: s3,
     bucket: 'project-mountain-bucket',
     contentType: multerS3.AUTO_CONTENT_TYPE, 
@@ -22,6 +22,7 @@ const upload = multerS3({
         cb(null, `uploads/${Date.now()}_${file.originalname}`)
     },
 })
+upload = multer({ storage: storage });
 
 router.post('/uploadOne', upload.single('img'), (req, res) => {
     try {
