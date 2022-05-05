@@ -33,6 +33,9 @@ app.use('/api/mountInfo', require('./routes/mountInfo'))
 //route handling for unity
 app.use('/api/unity', require('./routes/unity'))
 
+//route handling for imagemanage
+app.use('/api/image', require('./routes/imagemanage'));
+
 //통신 연습
 app.get('/', (req, res) => {
   res.json({message: 'hi backend!!!!!!!'})
