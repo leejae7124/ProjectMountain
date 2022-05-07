@@ -28,36 +28,21 @@ router.post('/init', auth, (req, res) => {
 })
 //자유게시판 댓글 추가
 router.post('/commentIn', (req, res) => {
-  const bord = new bordF(req.body.comment)
-  bordF.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment._id}}, function(error, docs){
+  bordF.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment}}, function(error, docs){
     if(error){
-      console.log(error);
-  }else{
-    bord.save((err) => {
-      if(err) return res.json({ success: false, err })
-      else {
-        res.send({success: true})
-      }
-    })
-  }
+        console.log(error);
+    }else{
+      res.send(docs)
+    }
   })
 })
 //자유게시판 댓글 리스트
 let array = new Array();
 router.post('/commentList', (req, res) => {
-  bordF.findOne({ name: req.body._id }, (err, result) => { 
+  bordF.findOne({ _id: req.body._id }, (err, result) => { 
     if (err) return res.status(500).send({error: 'failed'});
-res.send(result.comment)
-
-    for (let i = 0; i < result.comment.length; i++) {     
-        bordF.find({ _id: result.comment[i]}, (err, docs) => {
-            if (err) return res.status(500).send({error: 'failed'});
-            if(docs.length != 0) array = array.concat(docs);
-
-            //if(i == result.comment.length - 1) res.json(array);
-        })
-    }
-})
+    res.send(result.comment)
+  })
 array = []
 })
 //자유게시판 댓글 삭제
