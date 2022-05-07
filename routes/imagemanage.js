@@ -5,26 +5,37 @@ const multerS3 = require('multer-s3')
 const AWS = require("aws-sdk");
 const s3 = require('../config/s3');
 
-
 const storage = multerS3({ 
     s3: s3,
     bucket: 'project-mountain-bucket',
     contentType: multerS3.AUTO_CONTENT_TYPE, 
-    acl: 'public-read',
+    acl: 'public-read', 
     metadata: function (req, file, cb) {
         cb(null, { fieldName: file.fieldname }) 
     },
     key: function (req, file, cb) { 
-        cb(null, `uploads/${Date.now()}_${file.originalname}`)
+        if(file.fieldname  == 'u_img') //유저 프로필 이미지
+            cb(null, `uImage/${Date.now()}_${file.originalname}`)
+        if(file.fieldname  == 'b_img') //인증 게시판 이미지
+            cb(null, `bImage/${Date.now()}_${file.originalname}`)
     },
 })
+
 upload = multer({ storage: storage });
 
-router.post('/uploadOne', upload.single('img'), (req, res) => {
+
+
+router.post('/uploadUser', upload.single('u_img'), (req, res) => {
     try {
-        //console.log(req.file)
-        //let location = { url: req.file.location};
-        //res.status(200).send(location)
+        res.status(200).send(req.file.location);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Error');
+    }   
+})
+
+router.post('/uploadBoard', upload.single('b_img'), (req, res) => {
+    try {
         res.status(200).send(req.file.location);
     } catch (err) {
         console.log(err);
