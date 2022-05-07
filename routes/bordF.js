@@ -43,18 +43,22 @@ router.post('/commentIn', (req, res) => {
   })
 })
 //자유게시판 댓글 리스트
+let array = new Array();
 router.post('/commentList', (req, res) => {
-  const list = bordF.findOne({_id: req._id}).comment
+  bordF.findOne({ name: req.body._id }, (err, result) => { 
+    if (err) return res.status(500).send({error: 'failed'});
 
-  for (let i = 0; i < list.length; i++) {     
+    for (let i = 0; i < result.comment.length; i++) {     
 
-    bordF.find({ _id: list[i]}, (err, docs) => {
-        if (err) return res.status(500).send({error: 'failed'});
-        if(docs.length != 0) array = array.concat(docs);
+        bordF.find({ mntnid: result.comment[i]}, (err, docs) => {
+            if (err) return res.status(500).send({error: 'failed'});
+            if(docs.length != 0) array = array.concat(docs);
 
-        if(i == list.length - 1) res.json(array);
-    })
-  }
+            if(i == result.comment.length - 1) res.json(array);
+        })
+    }
+})
+array = []
 })
 //자유게시판 댓글 삭제
 router.post('/commentOut', (req, res) => {
