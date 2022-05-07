@@ -50,7 +50,7 @@ router.post('/commentList', (req, res) => {
 
     for (let i = 0; i < result.comment.length; i++) {     
 
-        bordF.find({ mntnid: result.comment[i]}, (err, docs) => {
+        bordF.find({ _id: result.comment[i]}, (err, docs) => {
             if (err) return res.status(500).send({error: 'failed'});
             if(docs.length != 0) array = array.concat(docs);
 
@@ -62,7 +62,7 @@ array = []
 })
 //자유게시판 댓글 삭제
 router.post('/commentOut', (req, res) => {
-  const bord = new bordF(req.body)
+  bordF.deleteOne({_id: req.body._id})
   bordF.updateOne({_id: req.body._id}, {$pull: {comment: req.body.comment}}, function(error, docs){
     if(error){
         console.log(error);
