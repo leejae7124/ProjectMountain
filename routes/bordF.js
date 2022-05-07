@@ -28,13 +28,18 @@ router.post('/init', auth, (req, res) => {
 })
 //자유게시판 댓글 추가
 router.post('/commentIn', (req, res) => {
-  const bord = new bordF(req.body)
-  bordF.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment}}, function(error, docs){
+  const bord = new bordF(req.body.comment)
+  bordF.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment._id}}, function(error, docs){
     if(error){
-        console.log(error);
-    }else{
-      res.send(docs)
-    }
+      console.log(error);
+  }else{
+    bord.save((err) => {
+      if(err) return res.json({ success: false, err })
+      else {
+        res.send({success: true})
+      }
+    })
+  }
   })
 })
 //자유게시판 댓글 삭제

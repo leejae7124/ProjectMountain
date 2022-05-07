@@ -44,11 +44,13 @@ const userSchema = mongoose.Schema({
     badge: {
         type: Array
     },
-    badgeCount: {
-        type: Number
+    level: {
+        type: Number,
+        default: 0
     },
     badgeProgress: {
-        type: Number
+        type: Number,
+        default: 0
     },
     token: {
         type: String
