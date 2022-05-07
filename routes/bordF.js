@@ -49,12 +49,11 @@ router.post('/commentList', (req, res) => {
     if (err) return res.status(500).send({error: 'failed'});
 
     for (let i = 0; i < result.comment.length; i++) {     
-      res.send(result.comment)
         bordF.find({ _id: result.comment[i]}, (err, docs) => {
             if (err) return res.status(500).send({error: 'failed'});
             if(docs.length != 0) array = array.concat(docs);
 
-            //if(i == result.comment.length - 1) res.json(array);
+            if(i == result.comment.length - 1) res.json(array);
         })
     }
 })
