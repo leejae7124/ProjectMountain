@@ -43,7 +43,7 @@ router.post('/commentList', (req, res) => {
     if (err) return res.status(500).send({error: 'failed'});
     res.send(result.comment)
   })
-array = []
+  array = []
 })
 //자유게시판 댓글 삭제
 router.post('/commentOut', (req, res) => {
