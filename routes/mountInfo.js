@@ -20,7 +20,6 @@ const Mount_loc_schema =
     Mount.mountainGyeongnam,
     Mount.mountainJeju
 ]
-const MountainList = require('../model/MountList');
 const { mountain_list } = require('../model/MountList');
 
 //키워드별 정보 전송

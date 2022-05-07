@@ -8,6 +8,25 @@ const Commu_schema =[
   Commu.bordF,
   Commu.bordQ
 ]
+const Mount = require('../model/Mountain.js');
+const Mount_loc_schema = 
+[   Mount.mountainSeoul, 
+    Mount.mountainBusan, 
+    Mount.mountainDaegu, 
+    Mount.mountainIncheon, 
+    Mount.mountainGwangju, 
+    Mount.mountainDaejeon, 
+    Mount.mountainUlsan,
+    Mount.mountainGyeonggi,
+    Mount.mountainGangwon,
+    Mount.mountainChungcheongbuk,
+    Mount.mountainChungcheongnam,
+    Mount.mountainJeonbuk,
+    Mount.mountainJeonnam,
+    Mount.mountainGyeongbuk,
+    Mount.mountainGyeongnam,
+    Mount.mountainJeju
+]
 
 
 router.post('/register', (req, res) => {
