@@ -42,6 +42,20 @@ router.post('/commentIn', (req, res) => {
   }
   })
 })
+//자유게시판 댓글 리스트
+router.post('/commentList', (req, res) => {
+  const list = bordF.findOne({_id: req._id}).comment
+
+  for (let i = 0; i < list.length; i++) {     
+
+    bordF.find({ _id: list[i]}, (err, docs) => {
+        if (err) return res.status(500).send({error: 'failed'});
+        if(docs.length != 0) array = array.concat(docs);
+
+        if(i == list.length - 1) res.json(array);
+    })
+  }
+})
 //자유게시판 댓글 삭제
 router.post('/commentOut', (req, res) => {
   const bord = new bordF(req.body)
