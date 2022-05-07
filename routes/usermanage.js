@@ -35,9 +35,7 @@ router.post('/register', (req, res) => {
   const user = new User(req.body)
   user.save((err, userInfo) => {
     if(err) {
-    //err code가 11000은 중복된 값이 들어간 경우
-      if (err.code == 11000) return res.json({success: false, message: 'email or nickname duplicate'})
-      else return res.json({ success: false, err })
+      res.json({ success: false, err })
     }
     return res.status(200).json({
         success: true
