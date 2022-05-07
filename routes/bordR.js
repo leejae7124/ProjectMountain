@@ -36,6 +36,15 @@ router.post('/comment', (req, res) => {
     }
   })
 })
+//모집게시판 댓글 리스트
+let array = new Array();
+router.post('/commentList', (req, res) => {
+  bordR.findOne({ _id: req.body._id }, (err, result) => { 
+    if (err) return res.status(500).send({error: 'failed'});
+    res.send(result.comment)
+  })
+  array = []
+})
 //모집게시판 댓글 삭제
 router.post('/commentOut', (req, res) => {
   const bord = new bordF(req.body)
