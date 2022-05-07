@@ -19,9 +19,10 @@ const userSchema = mongoose.Schema({
         trim: true,
         unique: true
     },
-    password: { //최소길이 주기
+    password: { 
         type: String,
-        trim : true
+        trim : true,
+        minlength: 8
     },
     phone: {
         type: String,
@@ -42,6 +43,12 @@ const userSchema = mongoose.Schema({
     },
     badge: {
         type: Array
+    },
+    badgeCount: {
+        type: Number
+    },
+    badgeProgress: {
+        type: Number
     },
     token: {
         type: String
