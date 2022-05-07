@@ -96,21 +96,21 @@ router.post('/auth', auth, (req, res) => {
 router.post('/badgeInfo', auth, (req, res) => {
   //여기 까지 미들웨어를 통과해 왔다는 얘기는  Authentication 이 True 라는 말.
   
-  for (let i = 0; i < req.badge.length; i++) {     
+  for (let i = 0; i < req.user.badge.length; i++) {     
 
     //리스트에서 뽑은 id가 지역별 collection에 있는지 확인
     for(let j = 0; j < 15; j++){
-        Mount_loc_schema[j].find({ mntnid: req.badge[i]}, (err, docs) => {
+        Mount_loc_schema[j].find({ mntnid: req.user.badge[i]}, (err, docs) => {
             if (err) return res.status(500).send({error: 'failed'});
             if(docs.length != 0) array = array.concat(docs);
         })
     }
     //마직막 지역별 collection에 있는지 확인 후 전송
-    Mount_loc_schema[15].find({ mntnid: req.badge[i]}, (err, docs) => {
+    Mount_loc_schema[15].find({ mntnid: req.user.badge[i]}, (err, docs) => {
         if (err) return res.status(500).send({error: 'failed'});
         if(docs.length != 0) array = array.concat(docs);
 
-        if(i == req.badge.length - 1) res.json(array);
+        if(i == req.user.badge.length - 1) res.json(array);
     })
   }
 })
