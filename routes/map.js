@@ -14,7 +14,7 @@ router.get('/add', (req, res) => {
     res.send('fin')
 })
 
-router.get('/update', (req, res, next) => {
+router.post('/update', (req, res, next) => {
     map.collection.updateOne({_id: "map"},{$set: {x: req.body.x, y: req.body.y}}, function(error, docs){
         if(error){
             res.send(error);
