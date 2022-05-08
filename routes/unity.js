@@ -21,10 +21,6 @@ const Mount_loc_schema =
     Mount.mountainJeju
 ]
 
-let locatione = null;
-
-
-
 router.get('/get', (req, res) => {
     res.send('hi unity')
 })
