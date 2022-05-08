@@ -57,7 +57,7 @@ router.post('/commentOut', (req, res) => {
 })
 //인증게시판 수정
 router.post('/update', (req, res) => {
-  bordC.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text}}, function(error, docs){
+  bordC.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text, imagepath: req.body.imagepath}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
