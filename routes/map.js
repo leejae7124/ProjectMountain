@@ -9,11 +9,13 @@ const schema = new mongoose.Schema({
 });
 const map = mongoose.model('loc', schema)
 
+//처음 db 값 넣어주기
 router.get('/add', (req, res) => {
     map.collection.insertOne(req.body)
     res.send('fin')
 })
 
+//산 좌표 받아오기
 router.post('/update', (req, res, next) => {
     map.collection.updateOne({_id: "map"},{$set: {x: req.body.x, y: req.body.y}}, function(error, docs){
         if(error){
@@ -24,6 +26,7 @@ router.post('/update', (req, res, next) => {
     })
 })
 
+//지도 띄우기
 router.get('/', (req, res, next) => {
     map.collection.findOne({_id: "map"}, function(error, docs){
         if(error){
@@ -37,6 +40,5 @@ router.get('/', (req, res, next) => {
         }
     })
 })
-
 
 module.exports = router
