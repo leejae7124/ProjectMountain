@@ -36,6 +36,12 @@ app.use('/api/unity', require('./routes/unity'))
 //route handling for imagemanage
 app.use('/api/image', require('./routes/imagemanage'));
 
+//route handling for map
+const path = require('path')
+app.use('/api/map', require('./routes/map'))
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 //통신 연습
 app.get('/', (req, res) => {
   res.json({message: 'hi backend!!!!!!!'})
