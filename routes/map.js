@@ -19,7 +19,7 @@ router.post('/update', (req, res, next) => {
         if(error){
             res.send(error);
         }else{
-          res.send('yes')
+          res.json({message: 'yes'})
         }
     })
 })
