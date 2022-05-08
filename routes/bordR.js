@@ -27,7 +27,7 @@ router.post('/init', auth, (req, res) => {
   })
 })
 //모집게시판 댓글 추가
-router.post('/comment', (req, res) => {
+router.post('/commentIn', (req, res) => {
   bordR.updateOne({_id: req.body._id}, {$push: {comment: req.body.comment}}, function(error, docs){
     if(error){
         console.log(error);
