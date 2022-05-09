@@ -4,7 +4,7 @@ const key = require('../config/javascriptkey')
 const map = require('../model/loc')
 
 router.post('/set', (req, res, next) => {
-    map.mapSchema.collection.insertOne({token: req.body.token, x: req.body.x, y: req.body.y}, function(error, docs){
+    map.mapSchema.collection.updateOne({token: req.body.token},{$set: {x: req.body.x, y: req.body.y}}, { upsert: true }, function(error, docs){
         if(error){
             console.log(error);
         }else{

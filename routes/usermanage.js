@@ -186,7 +186,12 @@ router.post('/bordC', auth, (req, res) => {
 })
 
 router.post('/logout', auth, (req, res) => {
-  // console.log('req.user', req.user)
+  //loc 삭제
+  map.mapSchema.deleteOne({token: req.body.token}, (err, result) => {
+    if(err) console.log(err)
+    else console.log('delete')
+  })
+  
   User.findOneAndUpdate({ _id: req.user._id },
     { token: "" }
     , (err, user) => {
