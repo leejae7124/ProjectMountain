@@ -88,14 +88,14 @@ let keywordList = (req, res, next) => {
 router.post('/main', auth, keywordList, (req, res) => { 
     //랜덤하게 리스트 배열 중 중복없이 15개 id 뽑기
     let randomIndexArray = []
-    for (let n = 0; n < 15; n++) {
+    for (let n = 0; n < 7; n++) {
         randomNum = Math.floor(Math.random() * keywordArray.length)
         if (randomIndexArray.indexOf(randomNum) === -1) randomIndexArray.push(randomNum)
         else n--
     }
     for(let j =0; j < 15; j++) newArray.push(keywordArray[randomIndexArray[j]])
 
-    for (let i = 0; i < 15; i++) {     
+    for (let i = 0; i < 7; i++) {     
         //리스트에서 뽑은 id가 지역별 collection에 있는지 확인
         for(let j = 0; j < 15; j++){
             Mount_loc_schema[j].find({ mntnid: newArray[i]}, (err, docs) => {
@@ -108,7 +108,7 @@ router.post('/main', auth, keywordList, (req, res) => {
             if (err) return res.status(500).send({error: 'failed'});
             if(docs.length != 0) array = array.concat(docs);
 
-            if(i == 14) res.json(array);
+            if(i == 6) res.json(array);
         })
     }
     keywordArray = []
