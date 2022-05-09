@@ -21,6 +21,11 @@ const Mount_loc_schema =
     Mount.mountainJeju
 ]
 
+router.post('/client', auth, (req, res) => {
+
+    res.send({message: 'fin'})
+})
+
 router.get('/get', (req, res) => {
     res.send('hi unity')
 })

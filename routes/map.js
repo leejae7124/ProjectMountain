@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const key = require('../config/javascriptkey')
 
 // Define Schemes
 const schema = new mongoose.Schema({
@@ -9,31 +10,23 @@ const schema = new mongoose.Schema({
 });
 const map = mongoose.model('loc', schema)
 
-//처음 db 값 넣어주기
-router.get('/add', (req, res) => {
-    map.collection.insertOne(req.body)
-    res.send('fin')
-})
-
-//산 좌표 받아오기
-router.post('/update', (req, res, next) => {
-    map.collection.updateOne({_id: "map"},{$set: {x: req.body.x, y: req.body.y}}, function(error, docs){
+router.post('/set', (req, res, next) => {
+    map.collection.insertOne({token: req.body.token, x: req.body.x, y: req.body.y}, function(error, docs){
         if(error){
-            res.send(error);
+            console.log(error);
         }else{
-          res.json({message: 'yes'})
+          res.send({message: 'yes'})
         }
     })
 })
 
-//지도 띄우기
-router.get('/', (req, res, next) => {
-    map.collection.findOne({_id: "map"}, function(error, docs){
+router.get('/:token', (req, res, next) => {
+    map.collection.findOne({token: req.params.token}, function(error, docs){
         if(error){
             console.log(error);
         }else{
             res.render('map', {
-                javascriptkey: '770f232b413de4c27700024cd1dfc080',
+                javascriptkey: key.javascriptkey,
                 x: parseFloat(docs.x),
                 y: parseFloat(docs.y)
             })
