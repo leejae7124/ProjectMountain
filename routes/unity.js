@@ -27,7 +27,13 @@ router.post('/client', auth, (req, res) => {
 })
 
 router.get('/get', (req, res) => {
-    res.send('hi unity')
+    unity.collection.findOne({_id: "unity"} , function(error, docs){
+        if(error){
+            console.log(error);
+        }else{
+          res.send(docs.mntnnm)
+        }
+      })
 })
 
 router.post('/post', (req, res) => {
