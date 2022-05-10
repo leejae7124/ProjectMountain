@@ -86,14 +86,14 @@ let keywordList = (req, res, next) => {
     }
 }
 router.post('/main', auth, keywordList, (req, res) => { 
-    //랜덤하게 리스트 배열 중 중복없이 15개 id 뽑기
+    //랜덤하게 리스트 배열 중 중복없이 7개 id 뽑기
     let randomIndexArray = []
     for (let n = 0; n < 7; n++) {
         randomNum = Math.floor(Math.random() * keywordArray.length)
         if (randomIndexArray.indexOf(randomNum) === -1) randomIndexArray.push(randomNum)
         else n--
     }
-    for(let j =0; j < 15; j++) newArray.push(keywordArray[randomIndexArray[j]])
+    for(let j =0; j < 7; j++) newArray.push(keywordArray[randomIndexArray[j]])
 
     for (let i = 0; i < 7; i++) {     
         //리스트에서 뽑은 id가 지역별 collection에 있는지 확인
