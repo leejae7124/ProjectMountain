@@ -14,6 +14,9 @@ var communitySchema = new Schema({
     title: {
         type: String
     },
+    userImage: {
+        type: String
+    },
     text: {
         type: String
     },
