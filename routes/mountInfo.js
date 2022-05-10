@@ -85,8 +85,9 @@ let keywordList = (req, res, next) => {
         })
     }
 }
+
 router.post('/main', auth, keywordList, (req, res) => { 
-    //랜덤하게 리스트 배열 중 중복없이 7개 id 뽑기
+    //랜덤하게 리스트 배열 중 중복없이 15개 id 뽑기
     let randomIndexArray = []
     for (let n = 0; n < 7; n++) {
         randomNum = Math.floor(Math.random() * keywordArray.length)
