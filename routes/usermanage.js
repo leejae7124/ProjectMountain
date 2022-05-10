@@ -71,26 +71,12 @@ router.post('/login', (req, res) => {
         res.cookie("x_auth", user.token)
           .status(200)
           .json({ loginSuccess: true, 
-            //userId: user._id, 
             token: user.token,
             nickname: user.nickname ,
             userImage: user.userImage
-            //email: user.email,
           })
       })
     })
-  })
-})
-
-//키워드 수정하기
-router.post('/modify', auth, (req, res) => {
-  console.log(req.body.keyword)
-  User.updateOne({email: req.user.email}, {$set: {keyword: req.body.keyword}}, function(error, docs){
-    if(error){
-        console.log(error);
-    }else{
-      res.send(docs)
-    }
   })
 })
 
@@ -118,7 +104,6 @@ router.post('/auth', auth, (req, res) => {
     description: req.user.description,
     userImage: req.user.userImage,
     keyword: req.user.keyword,
-    //bord: req.user.bord,
     badge: req.user.badge
   })
 })
@@ -192,7 +177,7 @@ router.post('/logout', auth, (req, res) => {
     if(err) console.log(err)
     else console.log('delete')
   })
-  
+  //token 삭제
   User.findOneAndUpdate({ _id: req.user._id },
     { token: "" }
     , (err, user) => {
