@@ -30,11 +30,13 @@ const schema = new mongoose.Schema({
 });
 const unity = mongoose.model('unity', schema)
 
+//처음 db collection 만들기
 router.get('/add', (req, res) => {
     unity.collection.insertOne(req.body)
     res.send('fin')
 })
 
+//좌표 맏아서 업데이트
 router.post('/client', auth, (req, res) => {
     //리스트에서 뽑은 id가 지역별 collection에 있는지 확인
     for(let j = 0; j < 16; j++){
@@ -46,25 +48,26 @@ router.post('/client', auth, (req, res) => {
                 //산을 찾았을 경우 보낼 메세지 업데이트
                 unity.collection.updateOne({ _id: "unity"}, {$set: {mntnnm: docs.mntnnm}})
                 //산을 찾았을 경우 user 업데이트
-                User.collection.updateOne({email: req.user.email}, {$push: {badge: String(docs.mntnid)}})
-                User.collection.findOne({email: req.user.email}, function(error, result){
-                if(error){
-                    console.log(error);
-                }else{
-                    if(result.badge.length <= 10) {
-                        User.collection.updateOne({email: req.user.email}, {$set: {level: 1, badgeProgress: result.badge.length/10}})
-                    }
-                    else if(result.badge.length <= 100) {
-                        User.collection.updateOne({email: req.user.email}, {$set: {level: 2, badgeProgress: result.badge.length/100}})
-                    }
-                    else if(result.badge.length <= 1000) {
-                        User.collection.updateOne({email: req.user.email}, {$set: {level: 3, badgeProgress: result.badge.length/1000}})
-                    }   
-                }
-            })      
-        }
-    })
+                User.collection.updateOne({email: req.user.email}, {$push: {badge: String(docs.mntnid)}})       
+            }
+        })
     }
+    //badge porgress와 level update
+    User.collection.findOne({email: req.user.email}, function(error, result){
+        if(error){
+            console.log(error);
+        }else{
+            if(result.badge.length+1 <= 10) {
+                User.collection.updateOne({email: req.user.email}, {$set: {level: 1, badgeProgress: (result.badge.length+1)/10}})
+            }
+            else if(result.badge.length+1 <= 100) {
+                User.collection.updateOne({email: req.user.email}, {$set: {level: 2, badgeProgress: (result.badge.length+1)/100}})
+            }
+            else if(result.badge.length+1 <= 1000) {
+                User.collection.updateOne({email: req.user.email}, {$set: {level: 3, badgeProgress: (result.badge.length+1)/1000}})
+            }   
+        }
+    })  
     res.send({message: 'fin'})
 })
 
