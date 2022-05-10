@@ -77,7 +77,7 @@ router.get('/list', (req, res) => {
 })
 //인증게시판 삭제
 router.post('/delete', (req, res) => {
-  bordC.deleteOne({_id: req.body.id}, function(err, result){
+  bordC.deleteOne({_id: req.body._id}, function(err, result){
     if(error){
         console.log(error);
     }else{

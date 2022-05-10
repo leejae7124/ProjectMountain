@@ -78,7 +78,7 @@ router.get('/list', (req, res) => {
 })
 //모집게시판 삭제
 router.post('/delete', (req, res) => {
-  bordR.deleteOne({_id: req.body.id}, function(err, result){
+  bordR.deleteOne({_id: req.body._id}, function(err, result){
     if(error){
         console.log(error);
     }else{
