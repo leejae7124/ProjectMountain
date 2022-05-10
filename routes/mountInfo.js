@@ -94,7 +94,7 @@ router.post('/main', auth, keywordList, (req, res) => {
         if (randomIndexArray.indexOf(randomNum) === -1) randomIndexArray.push(randomNum)
         else n--
     }
-    for(let j =0; j < 7; j++) newArray.push(keywordArray[randomIndexArray[j]])
+    for(let j =0; j < 15; j++) newArray.push(keywordArray[randomIndexArray[j]])
 
     for (let i = 0; i < 7; i++) {     
         //리스트에서 뽑은 id가 지역별 collection에 있는지 확인
