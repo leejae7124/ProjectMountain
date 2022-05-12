@@ -100,7 +100,9 @@ router.post('/auth', auth, (req, res) => {
     description: req.user.description,
     userImage: req.user.userImage,
     keyword: req.user.keyword,
-    badge: req.user.badge
+    badge: req.user.badge,
+    badgeProgress: req.user.badgeProgress,
+    level: req.user.level
   })
 })
 

@@ -56,14 +56,16 @@ router.post('/commentOut', (req, res) => {
   })
 })
 //인증게시판 수정
-router.post('/update', (req, res) => {
-  bordC.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text, imagepath: req.body.imagepath}}, function(error, docs){
+router.post('/update', auth, (req, res) => {
+  if(req.user.bord.includes(req.body._id) == true){
+  bordC.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
       res.send(docs)
     }
-  })
+  })}
+  else res.send({message: 'fail'})
 })
 //인증게시판 리스트
 router.get('/list', (req, res) => {

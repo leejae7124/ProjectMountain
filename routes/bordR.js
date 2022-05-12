@@ -57,14 +57,16 @@ router.post('/commentOut', (req, res) => {
   })
 })
 //모집게시판 수정
-router.post('/update', (req, res) => {
+router.post('/update', auth, (req, res) => {
+  if(req.user.bord.includes(req.body._id) == true){
   bordR.updateOne({_id: req.body._id}, {$set: {title: req.body.title, text: req.body.text}}, function(error, docs){
     if(error){
         console.log(error);
     }else{
       res.send(docs)
     }
-  })
+  })}
+  else res.send({message: 'fail'})
 })
 //모집게시판 리스트
 router.get('/list', (req, res) => {
